@@ -1,0 +1,18 @@
+[package]
+name = "sverilogparse"
+version = "0.4.3"
+edition = "2021"
+description = "Verilog netlist (structural verilog) parser"
+license = "AGPL-3.0-only"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+awint = "0.17.0"
+clilog = { version = "0.2.5", path = "../clilog" }
+compact_str = "0.7.1"
+indenter = "0.3.3"
+itertools = "0.10.3"
+lazy_static = "1.4.0"
+nom = "7.1.3"
+regex = "1.6.0"

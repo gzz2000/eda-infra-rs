@@ -1,0 +1,29 @@
+[package]
+name = "ulib_zeroable_derive"
+description = "An implementation detail of zeroable"
+version = "0.2.0"
+authors = ["rodrimati1992 <rodrimatt1985@gmail.com>"]
+edition = "2018"
+license="MIT/Apache-2.0"
+repository="https://github.com/rodrimati1992/zeroable_crates"
+keywords = [ "no-std" ]
+categories = [ "no-std" ]
+include = [
+    "Cargo.toml", 
+    "src/**/*.rs", 
+    "../APACHE_license", "../MIT_license"
+]
+
+[badges]
+travis-ci = { repository =  "rodrimati1992/zeroable_crates/" }
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = "1.0"
+
+[dev-dependencies]
+regex= "~1.2"

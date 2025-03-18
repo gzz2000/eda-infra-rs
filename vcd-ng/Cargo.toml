@@ -1,0 +1,16 @@
+[package]
+name = "vcd-ng"
+version = "0.2.0"
+authors = ["Zizheng Guo <gzz_2000@126.com>"]
+description = "Read and write VCD (Value Change Dump) files, the next generation."
+license = "MIT"
+keywords = ["vcd", "verilog", "eda"]
+categories = ["parser-implementations", "encoding"]
+readme = "README.md"
+edition = "2021"
+
+[dependencies]
+atoi_radix10 = "0.0.1"
+bitvec = "1.0.1"
+compact_str = "0.7.1"
+linereader = "0.4.0"

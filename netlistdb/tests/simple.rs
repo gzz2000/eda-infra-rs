@@ -41,5 +41,6 @@ fn simple() {
     assert_eq!(db.pindirect, vec![O, O, O, I, I, I, O, I, I, O, I, O].into());
     assert_eq!(db.cell2noutputs, vec![3, 1, 1, 1].into());
 
-    assert_eq!(db.constant_nets.len(), 0);
+    assert_eq!(db.net_zero, None);
+    assert_eq!(db.net_one, None);
 }

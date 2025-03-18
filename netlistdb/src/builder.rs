@@ -395,8 +395,8 @@ impl NetlistDB {
             net2pin: Default::default(),
             pindirect: UVec::new(),
             cell2noutputs: UVec::new(),
-            constant_nets: HashMap::new(),
-            #[cfg(feature = "molt")] molt_names_cache: Default::default(),
+            net_zero: None,
+            net_one: None,
         };
 
         db.cellname2id.insert(HierName::empty(), 0);
@@ -438,8 +438,9 @@ impl NetlistDB {
         // first finalize the disjoint set and compute the sizes.
         let (num_nets, logicpin2nets, net_zero, net_one) =
             net_sets.finalize(db.num_logic_pins)?;
-            
         db.num_nets = num_nets;
+        db.net_zero = net_zero;
+        db.net_one = net_one;
 
         // finalize pin index and pin-net mapping.
         db.pinid2logicpinid = db.logicpintypes.iter()
@@ -578,7 +579,7 @@ impl NetlistDB {
                 ret_portname2pinid = Some(portname2pinid);
             });
         });
-
+        
         db.pinname2id = ret_pinname2id.unwrap();
         db.pin2cell = ret_pin2cell.unwrap();
         db.cell2pin = ret_cell2pin.unwrap();
@@ -588,9 +589,6 @@ impl NetlistDB {
         db.netname2id = ret_netname2id.unwrap();
         db.netnames = ret_netnames.unwrap();
         db.portname2pinid = ret_portname2pinid.unwrap();
-        db.constant_nets = net_zero.iter().map(|n| (*n, false)).chain(
-            net_one.iter().map(|n| (*n, true))
-        ).collect();
 
         clilog::finish!(time_build_public_maps);
         
@@ -648,7 +646,9 @@ impl NetlistDB {
             if outs.len() == 0 {
                 // if this net is not intended to be constant,
                 // we report the error.
-                if !self.constant_nets.contains_key(&i) {
+                if Some(i) != self.net_zero &&
+                    Some(i) != self.net_one
+                {
                     num_undriven_nets += 1;
                 }
                 continue;

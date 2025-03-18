@@ -150,11 +150,12 @@ pub struct NetlistDB {
     /// Pin direction.
     pub pindirect: UVec<Direction>,
 
-    /// Cell to number of outputs
     pub cell2noutputs: UVec<usize>,
 
-    /// Net indices tied to low (VSS, false) or high (VDD, true).
-    pub constant_nets: HashMap<usize, bool>,
+    /// Constant zero net index.
+    pub net_zero: Option<usize>,
+    /// Constant one net index.
+    pub net_one: Option<usize>,
 }
 
 impl NetlistDB {
@@ -175,5 +176,3 @@ pub use builder::{LeafPinProvider, NoDirection};
 
 #[doc(hidden)]
 pub use builder::DirectionProvider;
-
-pub mod cffi;

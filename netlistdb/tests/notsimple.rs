@@ -51,6 +51,7 @@ fn not_simple() {
     use Direction::*;
     assert_eq!(db.pindirect, vec![O, O, I, O, I, I, O, I, I, O, I, O, I, O, I, O, I, O, I, I, O, I, I, O].into());
     assert_eq!(db.cell2noutputs, vec![3, 1, 1, 1, 1, 1, 1, 1, 1].into());
-
-    assert_eq!(db.constant_nets, [(7, false)].into_iter().collect());
+    
+    assert_eq!(db.net_zero, Some(7));
+    assert_eq!(db.net_one, None);
 }

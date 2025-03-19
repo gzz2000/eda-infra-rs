@@ -168,6 +168,7 @@ fn literal(i: &[u8]) -> IResult<&[u8], Vec<WirexprBasic>> {
                 is_xz.lshr_(128).unwrap();
             }
         }
+        ret.reverse();
         ret
     })(i)
 }
